@@ -1,6 +1,8 @@
 package diet;
 
-import java.util.Collection;
+import java.util.*;
+
+import com.sun.xml.internal.bind.v2.runtime.output.ForkXmlOutput;
 
 
 /**
@@ -9,6 +11,9 @@ import java.util.Collection;
  *
  */
 public class Food {
+	
+	Map<String,NutritionalElement> products = new TreeMap<>();
+	TreeMap<String,NutritionalElement> rawMaterials = new TreeMap<>();
 
 	/**
 	 * Define a new raw material.
@@ -24,6 +29,7 @@ public class Food {
 									  double proteins,
 									  double carbs,
 									  double fat){
+		rawMaterials.put(name,new RawMaterial(name, calories, proteins, carbs, fat));
 	}
 	
 	/**
@@ -31,7 +37,8 @@ public class Food {
 	 * @return collection of raw materials though the {@link NutritionalElement} interface
 	 */
 	public Collection<NutritionalElement> rawMaterials(){
-		return null;
+	//	rawMaterials.co
+		return rawMaterials.values();		
 	}
 	
 	/**
@@ -40,7 +47,7 @@ public class Food {
 	 * @return  a raw material though the {@link NutritionalElement} interface
 	 */
 	public NutritionalElement getRawMaterial(String name){
-		return null;
+		return rawMaterials.get(name);
 	}
 
 	/**
@@ -57,6 +64,7 @@ public class Food {
 								  double proteins,
 								  double carbs,
 								  double fat){
+		products.put(name, new Product(name, calories, proteins, carbs, fat));
 	}
 	
 	/**
@@ -64,7 +72,7 @@ public class Food {
 	 * @return collection of products though the {@link NutritionalElement} interface
 	 */
 	public Collection<NutritionalElement> products(){
-		return null;
+		return (Collection<NutritionalElement>) products;
 	}
 	
 	/**
@@ -73,7 +81,7 @@ public class Food {
 	 * @return  a product though the {@link NutritionalElement} interface
 	 */
 	public NutritionalElement getProduct(String name){
-		return null;
+		return products.get(name);
 	}
 	
 	/**

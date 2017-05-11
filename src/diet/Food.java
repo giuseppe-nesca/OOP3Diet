@@ -2,7 +2,6 @@ package diet;
 
 import java.util.*;
 
-import com.sun.xml.internal.bind.v2.runtime.output.ForkXmlOutput;
 
 
 /**
@@ -12,9 +11,10 @@ import com.sun.xml.internal.bind.v2.runtime.output.ForkXmlOutput;
  */
 public class Food {
 	
-	Map<String,NutritionalElement> products = new TreeMap<>();
-	TreeMap<String,NutritionalElement> rawMaterials = new TreeMap<>();
-
+	private Map<String,NutritionalElement> products = new TreeMap<>();
+	private Map<String,NutritionalElement> rawMaterials = new TreeMap<>();
+	protected Map<String,NutritionalElement> recipes = new TreeMap<>();
+	
 	/**
 	 * Define a new raw material.
 	 * The nutritional values are specified for a conventional 100g quantity
@@ -72,7 +72,7 @@ public class Food {
 	 * @return collection of products though the {@link NutritionalElement} interface
 	 */
 	public Collection<NutritionalElement> products(){
-		return (Collection<NutritionalElement>) products;
+		return products.values();
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class Food {
 	 * @return collection of recipes though the {@link NutritionalElement} interface
 	 */
 	public Collection<NutritionalElement> recipes(){
-		return null;
+		return recipes.values();
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class Food {
 	 * @return  a recipe though the {@link NutritionalElement} interface
 	 */
 	public NutritionalElement getRecipe(String name){		
-		return null;
+		return recipes.get(name);
 	}
 	
 }

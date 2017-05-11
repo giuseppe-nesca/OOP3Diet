@@ -1,5 +1,8 @@
 package diet;
 
+import java.util.*;
+
+
 /**
  * Represent a recipe of the diet.
  * 
@@ -10,7 +13,13 @@ package diet;
  *
  */
 public class Recipe implements NutritionalElement {
-    
+	
+	private String name;
+	private Food food;
+	private Map<String, Double> ingredients = new TreeMap<>();
+	private double calories=0, proteins=0, carbs=0, fat=0;
+    private double grams=0;
+	
 	/**
 	 * Recipe constructor.
 	 * The reference {@code food} of type {@link Food} must be used to
@@ -20,6 +29,9 @@ public class Recipe implements NutritionalElement {
 	 * @param food object containing the information about ingredients
 	 */
 	public Recipe(String name, Food food){
+		this.name=name;
+		this.food=food;
+		food.recipes.put(name, this);//si aggiunge alle ricette possibili di food
 	}
 	
 	/**
@@ -31,30 +43,41 @@ public class Recipe implements NutritionalElement {
 	 * @param quantity the amount in grams of the raw material to be used
 	 */
 	public void addIngredient(String material, double quantity) {
+		NutritionalElement nutritionalElement = food.getRawMaterial(material);
+		ingredients.put(nutritionalElement.getName(), quantity); 
+		grams += quantity;
+		
+		calories += nutritionalElement.getCalories()*grams/100;
+		proteins += nutritionalElement.getProteins()*grams/100;
+		carbs += nutritionalElement.getCarbs()*grams/100;
+		fat += nutritionalElement.getFat()*grams/100;
 	}
 
 	public String getName() {
-		return null;
+		return name;
 	}
 
 	public double getCalories() {
-		return 0.0;
+		return calories*100/grams;
 	}
 
 	public double getProteins() {
-		return 0.0;
+		return proteins*100/grams;
 	}
 
 	public double getCarbs() {
-		return 0.0;
+		return carbs*100/grams;
 	}
 
 	public double getFat() {
-		return 0.0;
+		return fat*100/grams;
 	}
 
   public boolean per100g() {
 	  // a recipe expressed nutritional values per 100g
+//	  While the sum of the amounts of ingredients (in grams) of a recipe is not necessarily equal to 100g, 
+//	  the nutritional values of the recipe must refer to an hypothetical portion of 100 grams. 
+	  
     return true;
   }
 

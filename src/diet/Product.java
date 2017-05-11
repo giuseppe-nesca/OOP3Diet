@@ -3,10 +3,10 @@ package diet;
 public class Product implements NutritionalElement {
 
 	String name;
-	double calories;
-	double proteins;
-	double carbs;
-	double fat;
+	private double calories;
+	private double proteins;
+	private double carbs;
+	private double fat;
 	
 	public Product(String name, double calories, double proteins, double carbs, double fat) {
 		this.name = name;
@@ -43,7 +43,7 @@ public class Product implements NutritionalElement {
 
 	@Override
 	public boolean per100g() {
-		// TODO Auto-generated method stub
+		// valori sono per prodotto, non per peso
 		return false;
 	}
 

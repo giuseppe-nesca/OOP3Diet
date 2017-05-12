@@ -47,10 +47,10 @@ public class Recipe implements NutritionalElement {
 		ingredients.put(nutritionalElement.getName(), quantity); 
 		grams += quantity;
 		
-		calories += nutritionalElement.getCalories()*grams/100;
-		proteins += nutritionalElement.getProteins()*grams/100;
-		carbs += nutritionalElement.getCarbs()*grams/100;
-		fat += nutritionalElement.getFat()*grams/100;
+		calories += nutritionalElement.getCalories()*quantity/100;
+		proteins += nutritionalElement.getProteins()*quantity/100;
+		carbs += nutritionalElement.getCarbs()*quantity/100;
+		fat += nutritionalElement.getFat()*quantity/100;
 	}
 
 	public String getName() {
